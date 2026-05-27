@@ -1,6 +1,6 @@
 import fs from 'fs';
 import { pipeline } from '@xenova/transformers';
-async function generateEmbedding(dataInArray){
+ export async function generateEmbedding(dataInArray){
        const extractor = await pipeline(
             'feature-extraction',
             'Xenova/all-MiniLM-L6-v2'
@@ -33,4 +33,4 @@ async function readFile(){
     })
     await createFileForEmbedding(responseData,"embeddings.json");
 }
- readFile();
+//  readFile();
