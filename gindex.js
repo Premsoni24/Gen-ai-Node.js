@@ -11,16 +11,19 @@ const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_Key });
 app.get("/", async(req, res) => {
 
   const response = await ai.models.generateContentStream({
-    model:"gemini-2.0-flash",
+   model: "gemini-3.5-flash",
     contents: "tell me about ai in details",
   });
 
 //   console.log(response.text);
 for await (const chunk of response){
     const text = chunk.text;
-    console.log(text);
+    // console.log(text);
+    res.write(text);
 };
+// res.send("_____content generation completed_____");
 res.end("_____content generation completed_____");
+
 });
 
 
