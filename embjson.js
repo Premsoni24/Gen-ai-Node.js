@@ -1,5 +1,6 @@
 import fs from 'fs';
 import { pipeline } from '@xenova/transformers';
+
  export async function generateEmbedding(dataInArray){
        const extractor = await pipeline(
             'feature-extraction',
@@ -22,7 +23,7 @@ async function createFileForEmbedding(data,file){
     await fs.writeFileSync(file,bufferData);
 }
 async function readFile(){
-    const data = fs.readFileSync('./data.json', 'utf-8');
+    const data = fs.readFileSync('premData.json');
     const dataInArray = JSON.parse(data.toString());
     let responseData =  await generateEmbedding(dataInArray);
     responseData = responseData.map((item,index)=>{
@@ -31,6 +32,6 @@ async function readFile(){
             embedding:item
         }
     })
-    await createFileForEmbedding(responseData,"embeddings.json");
+    await createFileForEmbedding(responseData,"premembeddings.json");
 }
 //  readFile();
